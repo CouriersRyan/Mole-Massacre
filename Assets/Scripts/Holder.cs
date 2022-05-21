@@ -5,8 +5,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-///     Any object that, upon facing a Rigidbody, can pick up said Rigidbody
-///     Rigidbodies need to be in the "Holdable" layer to be held.
+///     Any object that, upon facing a gameobject, can pick up said gameobject.
+///     Gameobjects need to be in the "Holdable" layer to be held.
 /// </summary>
 public class Holder : MonoBehaviour
 {
@@ -16,19 +16,14 @@ public class Holder : MonoBehaviour
     [SerializeField] private Vector3 holdOffset;
 
     /// <summary>
-    ///     The rigidbody we are currently holding. Null if nothing is held.
+    ///     The Gameobject we are currently holding. Null if nothing is held.
     /// </summary>
-    private Rigidbody held;
+    private Transform held;
 
     /// <summary>
     ///     bruh
     /// </summary>
     private bool pickupPressed;
-
-    private void Start()
-    {
-        
-    }
 
     void FixedUpdate()
     {
@@ -37,8 +32,12 @@ public class Holder : MonoBehaviour
             if (held)
             {
                 held.transform.parent = null;
-                held.useGravity = true;
-                held.isKinematic = false;
+                foreach (var rigidbody in held.GetComponentsInChildren<Rigidbody>())
+                {
+                    rigidbody.useGravity = true;
+                    rigidbody.isKinematic = false;
+                }
+
                 held = null;
             }
             else
@@ -47,24 +46,19 @@ public class Holder : MonoBehaviour
                 var facingRay = new Ray(transform.position, transform.forward);
                 if (Physics.Raycast(facingRay, out var hitInfo, maxDistance: Mathf.Infinity, layerMask: holdableMask))
                 {
-                    held = hitInfo.rigidbody;
+                    held = hitInfo.transform.root;
+                    foreach (var rigidbody in held.GetComponentsInChildren<Rigidbody>())
+                    {
+                        rigidbody.useGravity = false;
+                        rigidbody.isKinematic = true;
+                    }
                     held.transform.position = transform.position + transform.TransformVector(holdOffset);
                     held.transform.parent = transform;
-                    held.isKinematic = true;
-                    held.useGravity = false;
                 }
             }
         }
 
         pickupPressed = false;
-    }
-
-    private void OnDrawGizmos()
-    {
-        var holdPoint =
-            transform.position;
-
-        Debug.DrawRay(holdPoint, 10f * transform.forward, Color.green);
     }
 
     void OnPickUp(InputValue inputValue)
