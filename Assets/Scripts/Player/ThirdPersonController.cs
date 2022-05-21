@@ -94,6 +94,8 @@ namespace StarterAssets
 
 		private bool IsCurrentDeviceMouse => _playerInput.currentControlScheme == "KeyboardMouse";
 
+		private int _teleportBuffer = 0;
+
 		private void Awake()
 		{
 			// get a reference to our main camera
@@ -223,15 +225,22 @@ namespace StarterAssets
 
 			Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
+			if (_teleportBuffer > 0)
+			{
+				_teleportBuffer--;
+				_speed = 0;
+			}
 			// move the player
 			_controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-
-			// update animator if using character
-			if (_hasAnimator)
-			{
-				_animator.SetFloat(_animIDSpeed, _animationBlend);
-				_animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
-			}
+				
+				/*
+				// update animator if using character
+				if (_hasAnimator)
+				{
+					_animator.SetFloat(_animIDSpeed, _animationBlend);
+					_animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+				}
+				*/
 		}
 
 		private void JumpAndGravity()
@@ -301,6 +310,16 @@ namespace StarterAssets
 			{
 				_verticalVelocity += Gravity * Time.deltaTime;
 			}
+		}
+
+		// Teleport the third person character and stop movement for a few frames afterwards.
+		public void Teleport(Vector3 pos, Quaternion rot)
+		{
+			_controller.enabled = false;
+			_teleportBuffer = 10;
+			transform.position = pos;
+			transform.rotation = rot;
+			_controller.enabled = true;
 		}
 
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)

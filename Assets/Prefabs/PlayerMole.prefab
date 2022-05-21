@@ -458,6 +458,7 @@ GameObject:
   - component: {fileID: 2046711031779969104}
   - component: {fileID: 2046711031779969105}
   - component: {fileID: 2046711031779969070}
+  - component: {fileID: 5451467588586572956}
   m_Layer: 8
   m_Name: PlayerMole
   m_TagString: Player
@@ -579,7 +580,7 @@ MonoBehaviour:
   GroundedRadius: 0.3
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 577
   CinemachineCameraTarget: {fileID: 4902853438746561390}
   TopClamp: 70
   BottomClamp: -30
@@ -621,6 +622,20 @@ MonoBehaviour:
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
+--- !u!114 &5451467588586572956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4741336783027161327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbac80896c878f843a0e1d2c0ab09370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  corpse: {fileID: 8587690666372665730, guid: 6413f511b19842a4ca90497ebda76a9f, type: 3}
+  respawnPoint: {fileID: 0}
 --- !u!1 &4756701658770562392
 GameObject:
   m_ObjectHideFlags: 0
