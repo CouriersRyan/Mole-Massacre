@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 /// <summary>
 ///     Any object that, upon facing a Rigidbody, can pick up said Rigidbody
+///     Rigidbodies need to be in the "Holdable" layer to be held.
 /// </summary>
 public class Holder : MonoBehaviour
 {
