@@ -25,6 +25,11 @@ public class Holder : MonoBehaviour
     /// </summary>
     private bool pickupPressed;
 
+    private void Start()
+    {
+        
+    }
+
     void FixedUpdate()
     {
         if (pickupPressed)
@@ -33,25 +38,33 @@ public class Holder : MonoBehaviour
             {
                 held.transform.parent = null;
                 held.useGravity = true;
+                held.isKinematic = false;
                 held = null;
             }
             else
             {
                 var holdableMask = 1 << LayerMask.NameToLayer("Holdable");
-                var holderTransform = transform;
-                var holdPoint = holderTransform.position + holderTransform.TransformPoint(holdOffset);
-                var facingRay = new Ray(holdPoint, holderTransform.forward);
+                var facingRay = new Ray(transform.position, transform.forward);
                 if (Physics.Raycast(facingRay, out var hitInfo, maxDistance: Mathf.Infinity, layerMask: holdableMask))
                 {
                     held = hitInfo.rigidbody;
-                    held.transform.position = holdPoint;
-                    held.transform.parent = holderTransform;
+                    held.transform.position = transform.position + transform.TransformVector(holdOffset);
+                    held.transform.parent = transform;
+                    held.isKinematic = true;
                     held.useGravity = false;
                 }
             }
         }
 
         pickupPressed = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        var holdPoint =
+            transform.position;
+
+        Debug.DrawRay(holdPoint, 10f * transform.forward, Color.green);
     }
 
     void OnPickUp(InputValue inputValue)
