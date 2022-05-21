@@ -529,7 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1250612e20f7dac4bb6534707f61af53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holdOffset: {x: 0, y: 0.1, z: 1}
+  holdOffset: {x: 0, y: 1, z: 1}
 --- !u!1001 &8975575991260461265
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -53,13 +53,6 @@ public class Holder : MonoBehaviour
         pickupPressed = false;
     }
 
-    private void OnDrawGizmos()
-    {
-                var holdPoint = transform.position + transform.TransformPoint(holdOffset);
-        Debug.DrawRay(holdPoint, 10f * transform.forward, Color.green);
-    }
-
-
     void OnPickUp(InputValue inputValue)
     {
         pickupPressed = inputValue.isPressed;
