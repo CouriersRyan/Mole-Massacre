@@ -458,7 +458,7 @@ GameObject:
   - component: {fileID: 2046711031779969104}
   - component: {fileID: 2046711031779969105}
   - component: {fileID: 2046711031779969070}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerMole
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -499,7 +499,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: a9ce43be9ec85b548bcc9825dd3d8748, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -517,13 +517,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.8
-  m_Radius: 0.28
+  m_Height: 1.1
+  m_Radius: 0.34
   m_SlopeLimit: 45
   m_StepOffset: 0.25
   m_SkinWidth: 0.02
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0.93, z: 0}
+  m_Center: {x: 0, y: 0.51, z: 0}
 --- !u!114 &2046711031779969107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,8 +566,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 2
-  SprintSpeed: 5.335
+  MoveSpeed: 8
+  SprintSpeed: 16
   RotationSmoothTime: 0.12
   SpeedChangeRate: 10
   JumpHeight: 1.2
@@ -575,8 +575,8 @@ MonoBehaviour:
   JumpTimeout: 0.3
   FallTimeout: 0.15
   Grounded: 1
-  GroundedOffset: -0.14
-  GroundedRadius: 0.28
+  GroundedOffset: -0.05
+  GroundedRadius: 0.3
   GroundLayers:
     serializedVersion: 2
     m_Bits: 513
@@ -827,8 +827,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 6183013467117866806}
   m_AABB:
-    m_Center: {x: -0.22272307, y: -0.055911213, z: 0.0000013709068}
-    m_Extent: {x: 0.6295289, y: 0.43151852, z: 0.6325811}
+    m_Center: {x: -0.26375175, y: -0.055911213, z: -0.011557519}
+    m_Extent: {x: 0.58850026, y: 0.43151852, z: 0.62506026}
   m_DirtyAABB: 0
 --- !u!1 &4902853438746561390
 GameObject:
