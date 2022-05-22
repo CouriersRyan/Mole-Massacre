@@ -459,6 +459,7 @@ GameObject:
   - component: {fileID: 2046711031779969105}
   - component: {fileID: 2046711031779969070}
   - component: {fileID: 5451467588586572956}
+  - component: {fileID: 373838443687127750}
   m_Layer: 8
   m_Name: PlayerMole
   m_TagString: Player
@@ -549,7 +550,27 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6bc1aaf4-b110-4ff7-891e-5b9fe6f32c4d
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2690c379-f54d-45be-a724-414123833eb4
+    m_ActionName: Player/Look[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8c4abdf8-4099-493a-aa1a-129acec7c3df
+    m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 980e881e-182c-404c-8cbf-3d09fdb48fef
+    m_ActionName: Player/Sprint[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0c9e51d7-95d1-41ee-9774-d7f0750b7b34
+    m_ActionName: Player/PickUp[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -586,6 +607,7 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  setAnimParams: 0
 --- !u!114 &2046711031779969105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -635,7 +657,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   corpse: {fileID: 8587690666372665730, guid: 6413f511b19842a4ca90497ebda76a9f, type: 3}
-  respawnPoint: {fileID: 0}
+  respawnPoint: {x: 0, y: 0, z: 0}
+--- !u!114 &373838443687127750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4741336783027161327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1250612e20f7dac4bb6534707f61af53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdOffset: {x: 0, y: 0.7, z: 1.2}
+  holdableLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &4756701658770562392
 GameObject:
   m_ObjectHideFlags: 0

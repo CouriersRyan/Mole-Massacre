@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 /// <summary>
 ///     Any object that, upon facing a gameobject, can pick up said gameobject.
-///     Gameobjects need to be in the "Holdable" layer to be held.
 /// </summary>
 public class Holder : MonoBehaviour
 {
@@ -21,45 +20,9 @@ public class Holder : MonoBehaviour
     private Transform held;
 
     /// <summary>
-    ///     bruh
+    ///     The collision layers which this Holder can hold
     /// </summary>
-    private bool pickupPressed;
-
-    void FixedUpdate()
-    {
-        if (pickupPressed)
-        {
-            if (held)
-            {
-                held.transform.parent = null;
-                foreach (var childRBody in held.GetComponentsInChildren<Rigidbody>())
-                {
-                    childRBody.useGravity = true;
-                    childRBody.isKinematic = false;
-                }
-
-                held = null;
-            }
-            else
-            {
-                var holdableMask = 1 << LayerMask.NameToLayer("Holdable");
-                var facingRay = new Ray(transform.position, transform.forward);
-                if (Physics.Raycast(facingRay, out var hitInfo, maxDistance: Mathf.Infinity, layerMask: holdableMask))
-                {
-                    held = hitInfo.transform.root;
-                    foreach (var childRBody in held.GetComponentsInChildren<Rigidbody>())
-                    {
-                        childRBody.useGravity = false;
-                        childRBody.isKinematic = true;
-                    }
-                    held.transform.position = transform.position + transform.TransformVector(holdOffset);
-                    held.transform.parent = transform;
-                }
-            }
-        }
-
-        pickupPressed = false;
-    }
+    [SerializeField] private LayerMask holdableLayer;
 
     /// <summary>
     ///     Called by Unity's new input system
@@ -67,6 +30,32 @@ public class Holder : MonoBehaviour
     /// <param name="inputValue">Input values passed in by input system.</param>
     void OnPickUp(InputValue inputValue)
     {
-        pickupPressed = inputValue.isPressed;
+        if (held)
+        {
+            held.transform.parent = null;
+            foreach (var childRBody in held.GetComponentsInChildren<Rigidbody>())
+            {
+                childRBody.useGravity = true;
+                childRBody.isKinematic = false;
+            }
+
+            held = null;
+        }
+        else
+        {
+            var facingRay = new Ray(transform.position, transform.forward);
+            if (Physics.Raycast(facingRay, out var hitInfo, maxDistance: Mathf.Infinity, layerMask: holdableLayer))
+            {
+                held = hitInfo.transform.root;
+                foreach (var childRBody in held.GetComponentsInChildren<Rigidbody>())
+                {
+                    childRBody.useGravity = false;
+                    childRBody.isKinematic = true;
+                }
+
+                held.transform.position = transform.position + transform.TransformVector(holdOffset);
+                held.transform.parent = transform;
+            }
+        }
     }
 }
