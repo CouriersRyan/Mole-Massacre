@@ -8,7 +8,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
-    public static bool paused { get; private set; }
+    public static event Action OnGameOver;
+    public static bool isPaused { get; private set; }
+    public static bool isGameOver { get; private set; }
 
     public static GameManager Instance
     {
@@ -35,8 +37,8 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        DontDestroyOnLoad(this);
-        paused = false;
+        isPaused = false;
+        isGameOver = false;
     }
 
     public void Restart()
@@ -44,16 +46,24 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void Pause()
+    public static void Pause()
     {
-        paused = true;
+        isPaused = true;
+        Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0;
     }
 
-    public void Resume()
+    public static void Resume()
     {
-        paused = false;
+        isPaused = false;
         Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public static void GameOver()
+    {
+        isGameOver = true;
+        OnGameOver?.Invoke();
     }
 
     public void Quit()

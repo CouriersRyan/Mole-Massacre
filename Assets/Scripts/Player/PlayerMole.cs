@@ -31,18 +31,7 @@ public class PlayerMole : MonoBehaviour
         Instantiate(corpse, transform.position, transform.rotation);
         _controller.Teleport(respawnPoint, Quaternion.identity);
         lives--;
-        if (lives <= 0)
-        {
-            // TODO: Add an actual game over screen (maybe allow player to restart)
-            Debug.Log("Game over!");
-#if UNITY_EDITOR
-            // Application.Quit() does not work in the editor so
-            // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
-        }
+        if (lives <= 0) GameManager.GameOver();
     }
 
     private void OnTriggerEnter(Collider other)

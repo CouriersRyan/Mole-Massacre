@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(RectTransform))]
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private InputAction pauseButton;
@@ -18,7 +19,7 @@ public class PauseMenu : MonoBehaviour
         pauseButton.Disable();
     }
 
-    private void Awake()
+    private void Start()
     {
         Resume();
         InputSystem.onAfterUpdate += () =>
@@ -26,7 +27,7 @@ public class PauseMenu : MonoBehaviour
             // doesn't work in Update() for some reason
             if (pauseButton.WasReleasedThisFrame())
             {
-                if (GameManager.paused) Resume();
+                if (GameManager.isPaused) Resume();
                 else Pause();
             }
         };
@@ -34,17 +35,17 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
+        if (GameManager.isGameOver) return;
         foreach (Transform child in transform)
             child.gameObject.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;
-        GameManager.Instance.Pause();
+        GameManager.Pause();
     }
 
     public void Resume()
     {
+        if (GameManager.isGameOver) return;
         foreach (Transform child in transform)
             child.gameObject.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        GameManager.Instance.Resume();
+        GameManager.Resume();
     }
 }

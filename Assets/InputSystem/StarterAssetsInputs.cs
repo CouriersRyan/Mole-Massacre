@@ -27,7 +27,7 @@ namespace StarterAssets
 
         public void OnLook(InputValue value)
         {
-            if (cursorInputForLook && !GameManager.paused)
+            if (cursorInputForLook && !GameManager.isPaused)
             {
                 LookInput(value.Get<Vector2>());
             }
@@ -71,7 +71,7 @@ namespace StarterAssets
 
         private void OnApplicationFocus(bool hasFocus)
         {
-            SetCursorState(!GameManager.paused && cursorLocked);
+            SetCursorState(!GameManager.isPaused && cursorLocked);
         }
 
         private void SetCursorState(bool newState)
