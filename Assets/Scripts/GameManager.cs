@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
     }
 
-    public void Restart()
+    public static void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         OnGameOver?.Invoke();
     }
 
-    public void Quit()
+    public static void Quit()
     {
 #if UNITY_EDITOR
             // Application.Quit() does not work in the editor so
