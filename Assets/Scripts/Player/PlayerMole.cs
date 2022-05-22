@@ -73,14 +73,4 @@ public class PlayerMole : MonoBehaviour
                 break;
         }
     }
-
-    // TODO: Move this to some UI button and/or indicate hotkey somewhere in the game
-    /// <summary>
-    ///     Reloads the active scene.
-    /// </summary>
-    /// <param name="inputValue">Ignored.</param>
-    void OnRestart(InputValue inputValue)
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
 }

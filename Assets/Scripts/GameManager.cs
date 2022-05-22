@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
+    public static bool paused { get; private set; }
 
     public static GameManager Instance
     {
@@ -30,15 +31,34 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this);
+        paused = false;
     }
 
-    public void PauseGame()
+    public void Restart()
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void Pause()
+    {
+        paused = true;
         Time.timeScale = 0;
     }
 
-    public void ResumeGame()
+    public void Resume()
     {
-        Time.timeScale = 0;
+        paused = false;
+        Time.timeScale = 1;
+    }
+
+    public void Quit()
+    {
+#if UNITY_EDITOR
+            // Application.Quit() does not work in the editor so
+            // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
     }
 }
