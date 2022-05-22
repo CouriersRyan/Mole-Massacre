@@ -7,6 +7,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(RectTransform))]
 public class PauseMenu : MonoBehaviour
 {
+    /// <summary>
+    ///     Contains the input needed to trigger the pause menu to appear.
+    /// </summary>
     [SerializeField] private InputAction pauseButton;
 
     private void OnEnable()
@@ -21,19 +24,22 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
-        Resume();
+        CloseMenu();
         InputSystem.onAfterUpdate += () =>
         {
             // doesn't work in Update() for some reason
             if (pauseButton.WasReleasedThisFrame())
             {
-                if (GameManager.isPaused) Resume();
-                else Pause();
+                if (GameManager.isPaused) CloseMenu();
+                else ShowMenu();
             }
         };
     }
 
-    public void Pause()
+    /// <summary>
+    ///     Pauses the game and shows the pause menu
+    /// </summary>
+    public void ShowMenu()
     {
         if (GameManager.isGameOver) return;
         foreach (Transform child in transform)
@@ -41,7 +47,10 @@ public class PauseMenu : MonoBehaviour
         GameManager.Pause();
     }
 
-    public void Resume()
+    /// <summary>
+    ///     Resumes the game and hides the pause menu
+    /// </summary>
+    public void CloseMenu()
     {
         if (GameManager.isGameOver) return;
         foreach (Transform child in transform)
