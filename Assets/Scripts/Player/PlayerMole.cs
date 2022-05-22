@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using StarterAssets;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 // Handles dying, respawning, and ending the level.
 public class PlayerMole : MonoBehaviour
@@ -52,5 +54,15 @@ public class PlayerMole : MonoBehaviour
                 Die();
                 break;
         }
+    }
+    
+    // TODO: Move this to some UI button and/or indicate hotkey somewhere in the game
+    /// <summary>
+    ///     Reloads the active scene.
+    /// </summary>
+    /// <param name="inputValue">Ignored.</param>
+    void OnRestart(InputValue inputValue)
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

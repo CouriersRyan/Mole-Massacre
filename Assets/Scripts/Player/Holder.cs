@@ -15,19 +15,22 @@ public class Holder : MonoBehaviour
     [SerializeField] private Vector3 holdOffset;
 
     /// <summary>
+    ///     The collision layers which this Holder can hold
+    /// </summary>
+    [SerializeField] private LayerMask holdableLayer;
+    
+    /// <summary>
     ///     The Gameobject we are currently holding. Null if nothing is held.
     /// </summary>
     private Transform held;
 
     /// <summary>
-    ///     The collision layers which this Holder can hold
-    /// </summary>
-    [SerializeField] private LayerMask holdableLayer;
-
-    /// <summary>
     ///     Called by Unity's new input system
+    ///     Lets go of held item when held, reenabling physics on rigidbodies
+    ///     Holds any rigidbody in the holdable layers that the Holder is facing if no item is held
+    ///     Holding a rigidbody makes it kinematic.
     /// </summary>
-    /// <param name="inputValue">Input values passed in by input system.</param>
+    /// <param name="inputValue">Ignored.</param>
     void OnPickUp(InputValue inputValue)
     {
         if (held)
@@ -38,7 +41,6 @@ public class Holder : MonoBehaviour
                 childRBody.useGravity = true;
                 childRBody.isKinematic = false;
             }
-
             held = null;
         }
         else
