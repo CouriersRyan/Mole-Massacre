@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 // Handles dying, respawning, and ending the level.
-// TODO: Maybe separate level logic (ending/restarting level) from dying/corpse logic?
 public class PlayerMole : MonoBehaviour
 {
     [SerializeField] private GameObject corpse;

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4700637391874431108}
   - component: {fileID: 4700637391874431109}
   m_Layer: 5
-  m_Name: Quit Game
+  m_Name: Quit Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,8 +122,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4700637393816094299}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+      - m_Target: {fileID: 6310504463170478227, guid: 1016a375cf69b4d45a074631533a9259, type: 3}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
@@ -821,7 +821,7 @@ GameObject:
   - component: {fileID: 4700637392629520878}
   - component: {fileID: 4700637392629520879}
   m_Layer: 5
-  m_Name: Restart Game
+  m_Name: Restart Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -930,8 +930,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4700637393816094299}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+      - m_Target: {fileID: 6310504463170478227, guid: 1016a375cf69b4d45a074631533a9259, type: 3}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: Restart
         m_Mode: 1
         m_Arguments:

@@ -30,6 +30,11 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        if (_instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         DontDestroyOnLoad(this);
         paused = false;
     }
