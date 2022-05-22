@@ -141,7 +141,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3184635109385349977}
-  - component: {fileID: 2441520766192939235}
   - component: {fileID: 4639696885261046922}
   m_Layer: 0
   m_Name: Checkpoint
@@ -165,19 +164,6 @@ Transform:
   m_Father: {fileID: 6891204839990032984}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2441520766192939235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6931709149875283482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84a5b6fcd6cd68d498089f3aac6ea4a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nestedPlayerPrefab: {fileID: 0}
 --- !u!65 &4639696885261046922
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -212,7 +198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3218172570340600877, guid: 901eb71438b19ff4ab8877c9cfba0fc2, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 2.2507677
+      value: 2.2553847
       objectReference: {fileID: 0}
     - target: {fileID: 3242949053182303369, guid: 901eb71438b19ff4ab8877c9cfba0fc2, type: 3}
       propertyPath: m_RootOrder
