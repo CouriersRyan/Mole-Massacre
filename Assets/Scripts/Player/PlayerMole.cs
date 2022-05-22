@@ -31,7 +31,7 @@ public class PlayerMole : MonoBehaviour
         Instantiate(corpse, transform.position, transform.rotation);
         _controller.Teleport(respawnPoint, Quaternion.identity);
         lives--;
-        if (lives <= 0) GameManager.GameOver();
+        if (lives < 0) GameManager.GameOver();
     }
 
     private void OnTriggerEnter(Collider other)

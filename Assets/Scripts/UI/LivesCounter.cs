@@ -18,6 +18,6 @@ public class LivesCounter : MonoBehaviour
 
     private void Update()
     {
-        _text.text = $"Lives: {_player.lives}";
+        _text.text = GameManager.isGameOver ? "Out of lives!" : $"Lives: {_player.lives}";
     }
 }
