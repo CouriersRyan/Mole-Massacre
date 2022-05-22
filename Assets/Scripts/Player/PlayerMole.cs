@@ -16,13 +16,14 @@ public class PlayerMole : MonoBehaviour
 
     private ThirdPersonController _controller;
     private CharacterController _characterController;
-    private int _lives;
+
+    public int lives { get; private set; }
 
     private void Awake()
     {
         _controller = GetComponent<ThirdPersonController>();
         _characterController = GetComponent<CharacterController>();
-        _lives = maxLives;
+        lives = maxLives;
     }
 
     // Run when the player dies.
@@ -30,8 +31,8 @@ public class PlayerMole : MonoBehaviour
     {
         Instantiate(corpse, transform.position, transform.rotation);
         _controller.Teleport(respawnPoint, Quaternion.identity);
-        _lives--;
-        if (_lives <= 0)
+        lives--;
+        if (lives <= 0)
         {
             // TODO: Add an actual game over screen (maybe allow player to restart)
             Debug.Log("Game over!");
