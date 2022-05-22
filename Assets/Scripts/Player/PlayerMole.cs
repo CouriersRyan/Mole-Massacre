@@ -1,14 +1,11 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using StarterAssets;
 using UnityEngine;
 
-
 // Handles dying, respawning, and ending the level.
 public class PlayerMole : MonoBehaviour
 {
-
     [SerializeField] private GameObject corpse;
     [SerializeField] private Vector3 respawnPoint;
 
@@ -30,28 +27,30 @@ public class PlayerMole : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Death"))
+        var tag = other.tag;
+        switch (tag)
         {
-            Die();
-        }
-
-        if (other.gameObject.CompareTag("Checkpoint"))
-        {
-            respawnPoint = other.transform.position;
-        }
-
-        if (other.gameObject.CompareTag("Finish"))
-        {
-            Debug.Log("Level End!");
-            // Call an event from Game Manager to open the end of level menu.
+            case "Death":
+                Die();
+                break;
+            case "Checkpoint":
+                respawnPoint = other.transform.position;
+                break;
+            case "Finish":
+                Debug.Log("Level End!"); 
+                // TODO: Call an event from Game Manager to open the end of level menu.
+                break;
         }
     }
-    
+
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.gameObject.CompareTag("Death"))
+        var tag = hit.gameObject.tag;
+        switch (tag)
         {
-            Die();
+            case "Death":
+                Die();
+                break;
         }
     }
 }

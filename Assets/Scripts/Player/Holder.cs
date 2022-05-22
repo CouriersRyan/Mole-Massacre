@@ -32,10 +32,10 @@ public class Holder : MonoBehaviour
             if (held)
             {
                 held.transform.parent = null;
-                foreach (var rigidbody in held.GetComponentsInChildren<Rigidbody>())
+                foreach (var childRBody in held.GetComponentsInChildren<Rigidbody>())
                 {
-                    rigidbody.useGravity = true;
-                    rigidbody.isKinematic = false;
+                    childRBody.useGravity = true;
+                    childRBody.isKinematic = false;
                 }
 
                 held = null;
@@ -47,10 +47,10 @@ public class Holder : MonoBehaviour
                 if (Physics.Raycast(facingRay, out var hitInfo, maxDistance: Mathf.Infinity, layerMask: holdableMask))
                 {
                     held = hitInfo.transform.root;
-                    foreach (var rigidbody in held.GetComponentsInChildren<Rigidbody>())
+                    foreach (var childRBody in held.GetComponentsInChildren<Rigidbody>())
                     {
-                        rigidbody.useGravity = false;
-                        rigidbody.isKinematic = true;
+                        childRBody.useGravity = false;
+                        childRBody.isKinematic = true;
                     }
                     held.transform.position = transform.position + transform.TransformVector(holdOffset);
                     held.transform.parent = transform;
@@ -61,6 +61,10 @@ public class Holder : MonoBehaviour
         pickupPressed = false;
     }
 
+    /// <summary>
+    ///     Called by Unity's new input system
+    /// </summary>
+    /// <param name="inputValue">Input values passed in by input system.</param>
     void OnPickUp(InputValue inputValue)
     {
         pickupPressed = inputValue.isPressed;
