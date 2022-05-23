@@ -671,7 +671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1250612e20f7dac4bb6534707f61af53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holdOffset: {x: 0, y: 0.7, z: 1.2}
+  holdOffset: {x: 0, y: 0.7, z: 0.7}
   holdableLayer:
     serializedVersion: 2
     m_Bits: 64

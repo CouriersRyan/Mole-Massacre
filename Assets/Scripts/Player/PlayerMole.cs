@@ -10,25 +10,23 @@ public class PlayerMole : MonoBehaviour
 {
     [SerializeField] private GameObject corpse;
     [SerializeField] private Vector3 respawnPoint;
-    // TODO: Retrieve max lives from level data somewhere instead of from inspector
     [SerializeField] private int maxLives;
 
     private ThirdPersonController _controller;
-    private CharacterController _characterController;
 
     public int lives { get; private set; }
 
     private void Awake()
     {
         _controller = GetComponent<ThirdPersonController>();
-        _characterController = GetComponent<CharacterController>();
         lives = maxLives;
     }
 
     // Run when the player dies.
     void Die()
     {
-        Instantiate(corpse, transform.position, transform.rotation);
+        // This lies the corpse on its belly
+        Instantiate(corpse, transform.position, Quaternion.Euler(90, 0, 0));
         _controller.Teleport(respawnPoint, Quaternion.identity);
         lives--;
         if (lives < 0) GameManager.GameOver();
