@@ -41,8 +41,7 @@ public class PlayerMole : MonoBehaviour
                 respawnPoint = other.transform.position;
                 break;
             case "Finish":
-                Debug.Log("Level End!");
-                // TODO: Call an event from Game Manager to open the end of level menu.
+                GameManager.NextLevel();
                 break;
         }
     }
