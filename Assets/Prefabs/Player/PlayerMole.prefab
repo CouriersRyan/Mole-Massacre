@@ -519,7 +519,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.1
+  m_Height: 1.04
   m_Radius: 0.34
   m_SlopeLimit: 45
   m_StepOffset: 0.25
@@ -592,7 +592,7 @@ MonoBehaviour:
   SprintSpeed: 16
   RotationSmoothTime: 0.12
   SpeedChangeRate: 10
-  JumpHeight: 1.2
+  JumpHeight: 0.8
   Gravity: -15
   JumpTimeout: 0.3
   FallTimeout: 0.15

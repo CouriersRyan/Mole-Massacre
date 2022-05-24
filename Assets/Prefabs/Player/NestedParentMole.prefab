@@ -197,10 +197,6 @@ PrefabInstance:
       propertyPath: setAnimParams
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2046711031779969106, guid: 80afd8d3e1d18a14c8eccfae1bf5221d, type: 3}
-      propertyPath: m_Height
-      value: 1.1
-      objectReference: {fileID: 0}
     - target: {fileID: 4741336783027161327, guid: 80afd8d3e1d18a14c8eccfae1bf5221d, type: 3}
       propertyPath: m_Name
       value: Mole Player
