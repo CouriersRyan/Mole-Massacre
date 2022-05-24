@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +7,8 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class Holder : MonoBehaviour
 {
+    [SerializeField] private float range;
+
     /// <summary>
     ///     The FixedJoint we are currently holding. Null if nothing is held.
     /// </summary>
@@ -17,8 +18,6 @@ public class Holder : MonoBehaviour
     ///     What the Spring Joint was attached to before the player held it.
     /// </summary>
     private Rigidbody oldConnectedPoint;
-
-    [SerializeField] private float range;
 
     private Rigidbody rbody;
 
@@ -34,11 +33,11 @@ public class Holder : MonoBehaviour
     ///     Holding a rigidbody makes it kinematic.
     /// </summary>
     /// <param name="inputValue">Ignored.</param>
-    void OnPickUp(InputValue inputValue)
+    private void OnPickUp(InputValue inputValue)
     {
         if (held)
         {
-            foreach (Transform child in held.GetComponentsInChildren<Transform>())
+            foreach (var child in held.GetComponentsInChildren<Transform>())
                 child.gameObject.layer = LayerMask.NameToLayer("Holdable");
 
             held.gameObject.layer = LayerMask.NameToLayer("Holdable");
@@ -49,13 +48,13 @@ public class Holder : MonoBehaviour
         {
             var facingRay = new Ray(transform.position, transform.forward);
             var holdableLayer = LayerMask.GetMask("Holdable");
-            if (Physics.Raycast(facingRay, out var hitInfo, maxDistance: range, layerMask: holdableLayer))
+            if (Physics.Raycast(facingRay, out var hitInfo, range, holdableLayer))
             {
                 var hitObj = hitInfo.transform.root;
                 held = hitObj.GetComponent<FixedJoint>();
                 oldConnectedPoint = held.connectedBody;
                 held.connectedBody = rbody;
-                foreach (Transform child in held.GetComponentsInChildren<Transform>())
+                foreach (var child in held.GetComponentsInChildren<Transform>())
                     child.gameObject.layer = LayerMask.NameToLayer("Held");
 
                 held.gameObject.layer = LayerMask.NameToLayer("Held");

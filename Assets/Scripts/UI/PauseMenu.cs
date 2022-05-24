@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,16 +8,6 @@ public class PauseMenu : MonoBehaviour
     ///     Contains the input needed to trigger the pause menu to appear.
     /// </summary>
     [SerializeField] private InputAction pauseButton;
-
-    private void OnEnable()
-    {
-        pauseButton.Enable();
-    }
-
-    private void OnDisable()
-    {
-        pauseButton.Disable();
-    }
 
     private void Start()
     {
@@ -34,6 +21,16 @@ public class PauseMenu : MonoBehaviour
                 else ShowMenu();
             }
         };
+    }
+
+    private void OnEnable()
+    {
+        pauseButton.Enable();
+    }
+
+    private void OnDisable()
+    {
+        pauseButton.Disable();
     }
 
     /// <summary>

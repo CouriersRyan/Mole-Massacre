@@ -1,14 +1,11 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
-    public static event Action OnGameOver;
     public static bool isPaused { get; private set; }
     public static bool isGameOver { get; private set; }
 
@@ -30,16 +27,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Awake()
+    private void Awake()
     {
         if (_instance != null)
         {
             Destroy(gameObject);
             return;
         }
+
         isPaused = false;
         isGameOver = false;
     }
+
+    public static event Action OnGameOver;
 
     public static void Restart()
     {
@@ -69,9 +69,9 @@ public class GameManager : MonoBehaviour
     public static void Quit()
     {
 #if UNITY_EDITOR
-            // Application.Quit() does not work in the editor so
-            // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
-            UnityEditor.EditorApplication.isPlaying = false;
+        // Application.Quit() does not work in the editor so
+        // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
+        EditorApplication.isPlaying = false;
 #else
             Application.Quit();
 #endif

@@ -18,14 +18,15 @@ public class PlayerMole : MonoBehaviour
         lives = maxLives;
     }
 
-    // Run when the player dies.
-    void Die()
+    private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        // This lies the corpse on its belly
-        Instantiate(corpse, transform.position, Quaternion.Euler(90, 0, 0));
-        _controller.Teleport(respawnPoint, Quaternion.identity);
-        lives--;
-        if (lives < 0) GameManager.GameOver();
+        var tag = hit.gameObject.tag;
+        switch (tag)
+        {
+            case "Death":
+                Die();
+                break;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,14 +47,13 @@ public class PlayerMole : MonoBehaviour
         }
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    // Run when the player dies.
+    private void Die()
     {
-        var tag = hit.gameObject.tag;
-        switch (tag)
-        {
-            case "Death":
-                Die();
-                break;
-        }
+        // This lies the corpse on its belly
+        Instantiate(corpse, transform.position, Quaternion.Euler(90, 0, 0));
+        _controller.Teleport(respawnPoint, Quaternion.identity);
+        lives--;
+        if (lives < 0) GameManager.GameOver();
     }
 }
