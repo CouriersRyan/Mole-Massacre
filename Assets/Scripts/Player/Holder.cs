@@ -1,28 +1,24 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-///     Any object that, upon facing a gameobject, can pick up said gameobject.
+///     Any object that, upon facing a Fixed Joint, can pick up said Fixed Joint.
+///     The Fixed Joint must be in the "Holdable" layer.
 /// </summary>
 public class Holder : MonoBehaviour
 {
     /// <summary>
-    ///     Distance between position and holdable when held
+    ///     The FixedJoint we are currently holding. Null if nothing is held.
     /// </summary>
-    [SerializeField] private Vector3 holdOffset;
+    private FixedJoint held;
 
-    /// <summary>
-    ///     The collision layers which this Holder can hold
-    /// </summary>
-    [SerializeField] private LayerMask holdableLayer;
-    
-    /// <summary>
-    ///     The Gameobject we are currently holding. Null if nothing is held.
-    /// </summary>
-    private Transform held;
+    private Rigidbody rbody;
+
+    private void Awake()
+    {
+        rbody = GetComponent<Rigidbody>();
+    }
 
     /// <summary>
     ///     Called by Unity's new input system
@@ -35,28 +31,29 @@ public class Holder : MonoBehaviour
     {
         if (held)
         {
-            held.transform.parent = null;
-            foreach (var childRBody in held.GetComponentsInChildren<Rigidbody>())
+            foreach (Transform child in held.GetComponentsInChildren<Transform>())
             {
-                childRBody.useGravity = true;
-                childRBody.isKinematic = false;
+                child.gameObject.layer = LayerMask.NameToLayer("Holdable");
             }
+
+            held.connectedBody = null;
             held = null;
         }
         else
         {
             var facingRay = new Ray(transform.position, transform.forward);
+            var holdableLayer = LayerMask.GetMask("Holdable");
             if (Physics.Raycast(facingRay, out var hitInfo, maxDistance: Mathf.Infinity, layerMask: holdableLayer))
             {
-                held = hitInfo.transform.root;
-                foreach (var childRBody in held.GetComponentsInChildren<Rigidbody>())
+                var hitObj = hitInfo.transform.root;
+                held = hitObj.GetComponent<FixedJoint>();
+                held.connectedBody = rbody;
+                foreach (Transform child in held.GetComponentsInChildren<Transform>())
                 {
-                    childRBody.useGravity = false;
-                    childRBody.isKinematic = true;
+                    child.gameObject.layer = LayerMask.NameToLayer("Held");
                 }
 
-                held.transform.position = transform.position + transform.TransformVector(holdOffset);
-                held.transform.parent = transform;
+                held.gameObject.layer = LayerMask.NameToLayer("Held");
             }
         }
     }

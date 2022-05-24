@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using StarterAssets;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 // Handles dying, respawning, and ending the level.
 public class PlayerMole : MonoBehaviour
