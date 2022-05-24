@@ -61,3 +61,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# UserSettings, new in Unity 2021
+# https://forum.unity.com/threads/whats-the-usersettings-directory.754436/
+UserSettings/
