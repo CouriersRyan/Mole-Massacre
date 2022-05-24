@@ -42,7 +42,7 @@ public class Holder : MonoBehaviour
                 child.gameObject.layer = LayerMask.NameToLayer("Holdable");
 
             held.gameObject.layer = LayerMask.NameToLayer("Holdable");
-            held.connectedBody = oldConnectedPoint;    // TODO: letting go of corpse while a force is being applied causes it to fly away
+            held.connectedBody = oldConnectedPoint;
             held = null;
         }
         else
