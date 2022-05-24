@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6651986835024483852
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8587690666372665730, guid: 6413f511b19842a4ca90497ebda76a9f, type: 3}
+      propertyPath: m_Name
+      value: Mole Corpse Explosive
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963935146162309944, guid: 6413f511b19842a4ca90497ebda76a9f, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963935146162309944, guid: 6413f511b19842a4ca90497ebda76a9f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.6328278
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963935146162309944, guid: 6413f511b19842a4ca90497ebda76a9f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.03532219
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963935146162309944, guid: 6413f511b19842a4ca90497ebda76a9f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.6243687
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963935146162309944, guid: 6413f511b19842a4ca90497ebda76a9f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963935146162309944, guid: 6413f511b19842a4ca90497ebda76a9f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963935146162309944, guid: 6413f511b19842a4ca90497ebda76a9f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963935146162309944, guid: 6413f511b19842a4ca90497ebda76a9f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963935146162309944, guid: 6413f511b19842a4ca90497ebda76a9f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963935146162309944, guid: 6413f511b19842a4ca90497ebda76a9f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963935146162309944, guid: 6413f511b19842a4ca90497ebda76a9f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6413f511b19842a4ca90497ebda76a9f, type: 3}
+--- !u!1 &3133662982574245774 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8587690666372665730, guid: 6413f511b19842a4ca90497ebda76a9f, type: 3}
+  m_PrefabInstance: {fileID: 6651986835024483852}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1471679103421630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3133662982574245774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40173ee44dbc60744b7e6c350478a2e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 20
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
