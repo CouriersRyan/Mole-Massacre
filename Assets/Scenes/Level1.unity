@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 1343626213}
   - component: {fileID: 1343626212}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Start platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -548,7 +548,7 @@ GameObject:
   - component: {fileID: 1525590104}
   - component: {fileID: 1525590103}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: End platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -924,7 +924,7 @@ GameObject:
   - component: {fileID: 2045248177}
   - component: {fileID: 2045248174}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Lava
   m_TagString: Death
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

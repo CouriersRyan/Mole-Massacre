@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 1343626213}
   - component: {fileID: 1343626212}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Start platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -548,7 +548,7 @@ GameObject:
   - component: {fileID: 1525590104}
   - component: {fileID: 1525590103}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: End platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -921,10 +921,9 @@ GameObject:
   - component: {fileID: 2045248173}
   - component: {fileID: 2045248176}
   - component: {fileID: 2045248175}
-  - component: {fileID: 2045248177}
   - component: {fileID: 2045248174}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Lava
   m_TagString: Death
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1008,20 +1007,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2045248172}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &2045248177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2045248172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 673b5412a677dd943bd50f4c6eef2eb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: {x: 0, y: -0.05}
-  force: {x: -0.7, y: 0}
 --- !u!1001 &2075459517
 PrefabInstance:
   m_ObjectHideFlags: 0
