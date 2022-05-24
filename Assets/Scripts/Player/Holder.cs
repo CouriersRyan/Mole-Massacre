@@ -2,20 +2,20 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-///     Any object that, upon facing a Fixed Joint, can pick up said Fixed Joint.
-///     The Fixed Joint must be in the "Holdable" layer.
+///     Any object that, upon facing a Joint, can pick up said Joint.
+///     The Joint must be in the "Holdable" layer.
 /// </summary>
 public class Holder : MonoBehaviour
 {
     [SerializeField] private float range;
 
     /// <summary>
-    ///     The FixedJoint we are currently holding. Null if nothing is held.
+    ///     The Joint we are currently holding. Null if nothing is held.
     /// </summary>
-    private FixedJoint held;
+    private Joint held;
 
     /// <summary>
-    ///     What the Spring Joint was attached to before the player held it.
+    ///     What the Joint was attached to before the player held it.
     /// </summary>
     private Rigidbody oldConnectedPoint;
 
@@ -51,7 +51,7 @@ public class Holder : MonoBehaviour
             if (Physics.Raycast(facingRay, out var hitInfo, range, holdableLayer))
             {
                 var hitObj = hitInfo.transform.root;
-                held = hitObj.GetComponent<FixedJoint>();
+                held = hitObj.GetComponent<Joint>();
                 oldConnectedPoint = held.connectedBody;
                 held.connectedBody = rbody;
                 foreach (var child in held.GetComponentsInChildren<Transform>())
