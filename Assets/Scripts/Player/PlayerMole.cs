@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using StarterAssets;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ public class PlayerMole : MonoBehaviour
 
     private void Awake()
     {
+        Explosive.Explosives = new List<Explosive>();
         _controller = GetComponent<ThirdPersonController>();
         lives = maxLives;
     }
@@ -54,5 +56,14 @@ public class PlayerMole : MonoBehaviour
         _controller.Teleport(respawnPoint, Quaternion.identity);
         lives--;
         if (lives < 0) GameManager.GameOver();
+    }
+
+    // Explode the old explosive on press.
+    void OnExplode()
+    {
+        if (Explosive.Explosives[0] != null)
+        {
+            Explosive.Explosives[0].Explode();
+        }
     }
 }

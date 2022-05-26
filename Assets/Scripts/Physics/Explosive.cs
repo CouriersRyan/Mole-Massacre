@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Explosive : MonoBehaviour
 {
+    public static List<Explosive> Explosives;
     [SerializeField] private float power;
 
     /// <summary>
@@ -16,7 +18,8 @@ public class Explosive : MonoBehaviour
     {
         _bodyParts = GetComponentsInChildren<Rigidbody>();
         _joints = GetComponentsInChildren<CharacterJoint>();
-        Explode();
+        if (Explosives == null) Explosives = new List<Explosive>();
+        Explosives.Add(this);
     }
 
     public void Explode()
@@ -31,5 +34,7 @@ public class Explosive : MonoBehaviour
             if (hit.attachedRigidbody != null)
                 hit.attachedRigidbody.AddForce((hit.transform.position - transform.position).normalized * power,
                     ForceMode.Impulse);
+
+        Explosives.Remove(this);
     }
 }
