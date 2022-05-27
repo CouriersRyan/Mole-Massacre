@@ -5,6 +5,7 @@ Shader "Unlit/OutlineShader"
     {
         _OutlineColor ("Outline Color", Color) = (0, 0, 0, 1)
         _OutlineThickness("Outline Thickness", Range(0, 0.08)) = 0.03
+        _OutlineToggle("Outline Toggle", Range(0, 1)) = 0
     }
     SubShader
     {
@@ -26,6 +27,7 @@ Shader "Unlit/OutlineShader"
 
             fixed4 _OutlineColor;
             float _OutlineThickness;
+            float _OutlineToggle;
 
             // data put into vertex
             struct appdata
@@ -49,6 +51,10 @@ Shader "Unlit/OutlineShader"
             }
             
             fixed4 frag(v2f i) : SV_TARGET{
+                if(_OutlineToggle == 0)
+                {
+                    discard;
+                }
                 return  _OutlineColor;
             }
             
