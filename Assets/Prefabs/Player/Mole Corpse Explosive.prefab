@@ -77,4 +77,4 @@ MonoBehaviour:
   power: 20
   layerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 72

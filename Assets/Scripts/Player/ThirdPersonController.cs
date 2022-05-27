@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
@@ -173,9 +174,22 @@ namespace StarterAssets
             // set sphere position, with offset
             var spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
                 transform.position.z);
-            Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
-                QueryTriggerInteraction.Ignore);
+            /*Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
+                QueryTriggerInteraction.Ignore);*/
 
+            Collider[] ground = new Collider[1];
+            var size = Physics.OverlapSphereNonAlloc(spherePosition, GroundedRadius, ground, GroundLayers, QueryTriggerInteraction.Ignore);
+            Grounded = ground[0] != null;
+
+            if (Grounded && ground[0].CompareTag("Corpse"))
+            {
+                transform.SetParent(ground[0].transform, true);
+            }
+            else
+            {
+                transform.SetParent(null);
+            }
+            
             // update animator if using character
             if (_hasAnimator) _animator.SetBool(_animIDGrounded, Grounded);
         }
@@ -261,7 +275,7 @@ namespace StarterAssets
                 _teleportBuffer--;
                 _speed = 0;
             }
-
+            
             // move the player
             _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
