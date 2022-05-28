@@ -378,7 +378,6 @@ namespace StarterAssets
             {
                 _verticalVelocity = -Mathf.Sqrt(dir.normalized.y * power * 2f * Gravity);
             }
-            
         }
 
         // Teleport the third person character and stop movement for a few frames afterwards.

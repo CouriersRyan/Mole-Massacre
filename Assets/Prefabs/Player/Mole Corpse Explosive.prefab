@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 20
-  powerPlayer: 5
+  powerPlayer: 7
   layerMask:
     serializedVersion: 2
     m_Bits: 72
