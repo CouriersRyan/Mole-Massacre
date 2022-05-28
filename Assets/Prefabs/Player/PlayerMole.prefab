@@ -595,6 +595,7 @@ MonoBehaviour:
   SpeedChangeRate: 10
   JumpHeight: 0.8
   Gravity: -15
+  KnockbackDrag: 5
   JumpTimeout: 0.3
   FallTimeout: 0.15
   Grounded: 1

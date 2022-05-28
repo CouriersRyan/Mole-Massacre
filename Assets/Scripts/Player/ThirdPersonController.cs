@@ -34,6 +34,9 @@ namespace StarterAssets
 
         [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
         public float Gravity = -15.0f;
+        
+        [Tooltip("The percentage the knockback velocity decreases by every second.")]
+        public float KnockbackDrag = 0.4f;
 
         [Space(10)]
         [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
@@ -109,6 +112,7 @@ namespace StarterAssets
         private int _teleportBuffer;
         private readonly float _terminalVelocity = 53.0f;
         private float _verticalVelocity;
+        private Vector3 _knockbackVelocity;
 
         private bool IsCurrentDeviceMouse => _playerInput.currentControlScheme == "KeyboardMouse";
 
@@ -135,9 +139,13 @@ namespace StarterAssets
         private void Update()
         {
             _hasAnimator = TryGetComponent(out _animator) && setAnimParams;
-
+            if (_knockbackVelocity.magnitude != 0)
+            {
+                Debug.Log("test");
+            }
             JumpAndGravity();
             GroundedCheck();
+            CalcKnockback();
             Move();
         }
 
@@ -174,10 +182,10 @@ namespace StarterAssets
             // set sphere position, with offset
             var spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
                 transform.position.z);
-            /*Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
-                QueryTriggerInteraction.Ignore);*/
+            Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
+                QueryTriggerInteraction.Ignore);
 
-            Collider[] ground = new Collider[1];
+            /*Collider[] ground = new Collider[1];
             var size = Physics.OverlapSphereNonAlloc(spherePosition, GroundedRadius, ground, GroundLayers, QueryTriggerInteraction.Ignore);
             Grounded = ground[0] != null;
 
@@ -188,7 +196,7 @@ namespace StarterAssets
             else
             {
                 transform.SetParent(null);
-            }
+            }*/
             
             // update animator if using character
             if (_hasAnimator) _animator.SetBool(_animIDGrounded, Grounded);
@@ -275,10 +283,16 @@ namespace StarterAssets
                 _teleportBuffer--;
                 _speed = 0;
             }
+
+            if (_knockbackVelocity.magnitude > 0)
+            {
+                _speed = 0;
+            }
             
             // move the player
             _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime +
+                             _knockbackVelocity * Time.deltaTime);
 
 
             // update animator if using character
@@ -343,6 +357,30 @@ namespace StarterAssets
             if (_verticalVelocity < _terminalVelocity) _verticalVelocity += Gravity * Time.deltaTime;
         }
 
+        private void CalcKnockback()
+        {
+            _knockbackVelocity -=  _knockbackVelocity.normalized * (KnockbackDrag * Time.deltaTime);
+            if (_knockbackVelocity.magnitude < 0.2f)
+            {
+                _knockbackVelocity = Vector3.zero;
+            }
+        }
+
+        public void SetKnockback(Vector3 dir, float power)
+        {
+            _knockbackVelocity =  dir.normalized * Mathf.Sqrt(power * 2f * KnockbackDrag);
+            var verticalVelocity = dir.normalized.y;
+            if (verticalVelocity > 0)
+            {
+                _verticalVelocity = Mathf.Sqrt(dir.normalized.y * power * -2f * Gravity);
+            }
+            else
+            {
+                _verticalVelocity = -Mathf.Sqrt(dir.normalized.y * power * 2f * Gravity);
+            }
+            
+        }
+
         // Teleport the third person character and stop movement for a few frames afterwards.
         public void Teleport(Vector3 pos, Quaternion rot)
         {
@@ -350,6 +388,8 @@ namespace StarterAssets
             _teleportBuffer = 10;
             transform.position = pos;
             transform.rotation = rot;
+            _knockbackVelocity = Vector3.zero;
+            _verticalVelocity = 0;
             _controller.enabled = true;
         }
 

@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using StarterAssets;
 using UnityEngine;
 
 public class Explosive : MonoBehaviour
 {
     public static List<Explosive> Explosives;
     [SerializeField] private float power;
+    [SerializeField] private float powerPlayer;
 
     /// <summary>
     ///     The layers which this explosion should affect.
@@ -31,9 +33,17 @@ public class Explosive : MonoBehaviour
 
         var hits = Physics.OverlapSphere(transform.position, 20f, layerMask);
         foreach (var hit in hits)
-            if (hit.attachedRigidbody != null)
+        {
+            if (hit.CompareTag("Corpse"))
                 hit.attachedRigidbody.AddForce((hit.transform.position - transform.position).normalized * power,
                     ForceMode.Impulse);
+
+            if (hit.CompareTag("Player"))
+            {
+                var controller = hit.GetComponent<ThirdPersonController>();
+                controller.SetKnockback(hit.transform.position - transform.position, powerPlayer);
+            }
+        }
 
         Explosives.Remove(this);
     }
