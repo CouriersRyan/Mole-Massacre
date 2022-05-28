@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using StarterAssets;
 using UnityEngine;
@@ -7,6 +8,9 @@ public class Explosive : MonoBehaviour
     public static List<Explosive> Explosives;
     [SerializeField] private float power;
     [SerializeField] private float powerPlayer;
+    [SerializeField] private float radius = 20f;
+
+    [SerializeField] private GameObject explosionCircle;
 
     /// <summary>
     ///     The layers which this explosion should affect.
@@ -30,8 +34,11 @@ public class Explosive : MonoBehaviour
 
         foreach (var part in _bodyParts)
             part.AddForce((part.transform.position - transform.position).normalized * power, ForceMode.Force);
-
-        var hits = Physics.OverlapSphere(transform.position, 20f, layerMask);
+        
+        var hits = Physics.OverlapSphere(transform.position, radius, layerMask);
+        var circle = Instantiate(explosionCircle, transform.position, Quaternion.identity);
+        circle.transform.localScale *= radius * 2;
+        
         foreach (var hit in hits)
         {
             if (hit.CompareTag("Corpse"))
@@ -46,5 +53,13 @@ public class Explosive : MonoBehaviour
         }
 
         Explosives.Remove(this);
+        StartCoroutine(Remove());
+    }
+
+    IEnumerator Remove()
+    {
+        yield return new WaitForSeconds(0.5f);
+        
+        gameObject.SetActive(false);
     }
 }

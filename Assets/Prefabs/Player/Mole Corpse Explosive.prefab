@@ -76,6 +76,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   power: 20
   powerPlayer: 7
+  radius: 5
+  explosionCircle: {fileID: 4066931878454109780, guid: 6c4cb9872ae2fbc43a94d19552277c9b, type: 3}
   layerMask:
     serializedVersion: 2
     m_Bits: 72
