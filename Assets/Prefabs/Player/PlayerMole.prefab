@@ -658,7 +658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbac80896c878f843a0e1d2c0ab09370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  corpse: {fileID: 3133662982574245774, guid: aa70fc721eca7e848a961fd64b1ef67a, type: 3}
+  corpse: {fileID: 7981597997063621740, guid: 9901113b622ee414080f3814367f70e9, type: 3}
   respawnPoint: {x: 0, y: 0, z: 0}
   maxLives: 3
 --- !u!114 &373838443687127750
